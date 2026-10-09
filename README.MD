@@ -36,36 +36,43 @@ O firmware implementa uma varredura polar contínua de 360°, processando sinal 
 
 ## 🔌 Esquema de Ligação e Pinagem (Pinout)
 
-O sensor **HLK-LD2410** conecta-se à porta de expansão **UART2** (conector `P4`) da placa ESP32 CYD:
+O sensor **HLK-LD2410** conecta-se à porta de expansão **UART2** (conector `P4`) da placa ESP32 CYD. 
 
-┌────────────────────────────────┐                ┌─────────────────────────────────┐
-│     ESP32 CYD (Conector P4)    │                │        Radar HLK-LD2410         │
-│                                │                │                                 │
-│                         5V/VIN ├────────────────┤ VCC (Alimentação 5 VDC)         │
-│                            GND ├────────────────┤ GND (Terra de Referência)       │
-│                        GPIO 35 ├────────────────┤ TX (Saída Serial do Radar)      │
+O diagrama abaixo deve ser visualizado em fonte monoespaçada:
+
+```text
+┌────────────────────────────────┐                ┌────────────────────────────────┐
+│     ESP32 CYD (Conector P4)    │                │        Radar HLK-LD2410        │
+│                                │                │                                │
+│                         5V/VIN ├────────────────┤ VCC (Alimentação 5 VDC)        │
+│                            GND ├────────────────┤ GND (Terra de Referência)      │
+│                        GPIO 35 ├────────────────┤ TX (Saída Serial do Radar)     │
 │                        GPIO 22 ├────────────────┤ RX (Entrada Serial do Radar)    │
-└────────────────────────────────┘                └─────────────────────────────────┘
-> ⚠️ **Notas Importantes de Integração:**
-> 1. **Alimentação de 5V:** O módulo HLK-LD2410 exige alimentação estável em **5 VDC** para correto funcionamento do circuito de RF. Conecte estritamente ao pino VIN/5V.
-> 2. **Taxa de Transmissão (Baud Rate):** A comunicação assíncrona da interface `Serial2` opera na taxa de **256.000 baud**.
-> 3. **Cruzamento de Sinais (RX/TX):** O pino TX do sensor deve ser conectado ao RX do ESP32 (GPIO 35), e o pino RX do sensor ao TX do ESP32 (GPIO 22).
+└────────────────────────────────┘                └────────────────────────────────┘
 
----
 
-## 💻 Configuração do Ambiente e Bibliotecas
 
-### Bibliotecas Requeridas
-Instale as seguintes bibliotecas através do **Gerenciador de Bibliotecas do Arduino IDE**:
+⚠️ Notas Importantes de Integração:
 
-1. **`TFT_eSPI`** por Bodmer
-2. **`ld2410`** por ntechde
+Alimentação de 5V: O módulo HLK-LD2410 exige alimentação estável em 5 VDC para correto funcionamento do circuito de RF. Conecte estritamente ao pino VIN/5V.
 
-### ⚙️ Configuração da `TFT_eSPI` para o Hardware CYD
+Taxa de Transmissão (Baud Rate): A comunicação assíncrona da interface Serial2 opera na taxa de 256.000 baud.
 
-Antes da compilação, configure o arquivo `User_Setup.h` (ou selecione o header específico para o ESP32 Cheap Yellow Display) no diretório da biblioteca `TFT_eSPI` com o mapeamento de pinos do display:
+Cruzamento de Sinais (RX/TX): O pino TX do sensor deve ser conectado ao RX do ESP32 (GPIO 35), e o pino RX do sensor ao TX do ESP32 (GPIO 22).
 
-```cpp
+💻 Configuração do Ambiente e Bibliotecas
+Bibliotecas Requeridas
+Instale as seguintes bibliotecas através do Gerenciador de Bibliotecas do Arduino IDE:
+
+TFT_eSPI por Bodmer
+
+ld2410 por ntechde
+
+⚙️ Configuração da TFT_eSPI para o Hardware CYD
+Antes da compilação, configure o arquivo User_Setup.h (ou selecione o header específico para o ESP32 Cheap Yellow Display) no diretório da biblioteca TFT_eSPI com o mapeamento de pinos do display:
+
+C++
+
 #define ILI9341_DRIVER
 #define TFT_MISO 12
 #define TFT_MOSI 13
