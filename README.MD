@@ -5,7 +5,7 @@ An interactive, retro-futuristic **Submarine Sonar System** built for the **ESP3
 This project simulates a real-time radar sweep animation, detecting moving targets, plotting their positions on a circular radar grid, and displaying accurate distance and signal energy telemetry on a dedicated lateral HUD panel.
 
 <p align="center">
-  <img src="ESP32CYD.jpg" alt="Preview do Sonar" width="500">
+  <img src="ESP32CYD.JPG" alt="Preview do Sonar" width="500">
 </p>
 
 <p align="center">
